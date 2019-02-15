@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -35,28 +35,28 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class DBConfig
 {
-	// "Core" Variables.
+    // "Core" Variables.
 
-    private $host       = "localhost";
-    private $username   = "root";
+    private $host       = "";
+    private $username   = "";
     private $password   = "";
-    private $dbSchema   = "easql_test";
-    private $tblPrefix  = "db_";
-	private $viewPrefix = "dbv_";
-	
-	// "Main" Methods.
-	
-	public function getHostname() { return $this->host; }
-	
-	public function getUsername() { return $this->username; }
-	
-	public function getPassword() { return $this->password; }
-	
-	public function getSchemaName() { return $this->dbSchema; }
-	
-	public function getTablePrefix() { return $this->tblPrefix; }
-	
-	public function getViewPrefix() { return $this->viewPrefix; }
+    private $dbSchema   = "";
+    private $tblPrefix  = "";
+    private $viewPrefix = "";
+
+    // "Main" Methods.
+
+    public function getHostname() { return $this->host; }
+
+    public function getUsername() { return $this->username; }
+
+    public function getPassword() { return $this->password; }
+
+    public function getSchemaName() { return $this->dbSchema; }
+
+    public function getTablePrefix() { return $this->tblPrefix; }
+
+    public function getViewPrefix() { return $this->viewPrefix; }
 }
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -35,49 +35,49 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class EasySchema
 {
-	// "Core" Variables.
+    // "Core" Variables.
+
+    private $schemaName = null;
+
+    // "Constructor/s".
+
+    public function __construct($param = null)
+    {
+        if ($param != null)
+            $this->setName($param);
+    }
+
+    // "Set" Methods.
+
+    public function setName($param = null)
+    {
+        if (!is_string($param))
+            new Error("EasyTable", "Database schema must be string.");
+        else if (strlen($param) > 30)
+            new Error("EasyTable", "Database schema must be between 1 and 30 characters.");
+        else if (!preg_match("/^[a-z0-9_#$]+$/", $param))
+            new Error("EasyTable", "Database schema name constains illegal characters. You can use A-Z, 0-9, _, $ and #.");
+
+        $this->schemaName = mysql_real_escape_string($param);
+    }
 	
-	private $schemaName = null;
+    // "Get" Methods.
+
+    public function getName() { return $this->schemaName; }
 	
-	// "Constructor/s".
-	
-	public function __construct($param = null)
-	{
-		if ($param != null)
-			$this->setName($param);
-	}
-	
-	// "Set" Methods.
-	
-	public function setName($param = null)
-	{
-		if (!is_string($param))
-			new Error("EasyTable", "Database schema must be string.");
-		else if (strlen($param) > 30)
-			new Error("EasyTable", "Database schema must be between 1 and 30 characters.");
-		else if (!preg_match("/^[a-z0-9_#$]+$/", $param))
-			new Error("EasyTable", "Database schema name constains illegal characters. You can use A-Z, 0-9, _, $ and #.");
-			
-		$this->schemaName = mysql_real_escape_string($param);
-	}
-	
-	// "Get" Methods.
-	
-	public function getName() { return $this->schemaName; }
-	
-	// "Other" Methods.
-	
-	public function exists()
-	{
-		EasyGet::setParameters
-		(
-			new ColumnSelection("*"),
-			new TableSelection("information_schema.SCHEMATA"),
-			new ArgumentSelection(new Argument("SCHEMA_NAME", "=", $this->getName()))
-		);
-		
-		return EasyGet::execute() != null;
-	}
+    // "Other" Methods.
+
+    public function exists()
+    {
+        EasyGet::setParameters
+        (
+            new ColumnSelection("*"),
+            new TableSelection("information_schema.SCHEMATA"),
+            new ArgumentSelection(new Argument("SCHEMA_NAME", "=", $this->getName()))
+        );
+
+        return EasyGet::execute() != null;
+    }
 }
 
 ?>

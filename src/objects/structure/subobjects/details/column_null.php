@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -35,52 +35,52 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class ColumnNull
 {
-	// "Column Null" Constants.
-	
-	const CT_ALLOWED     = 0;
-	const CT_NOT_ALLOWED = 1;
+    // "Column Null" Constants.
 
-	// "Core" Variables.
+    const CT_ALLOWED     = 0;
+    const CT_NOT_ALLOWED = 1;
+
+    // "Core" Variables.
+
+    private $selOpt      = null;
 	
-	private $selOpt      = null;
+    // Constructor/s.
+
+    public function __construct($value = null)
+    {
+        if ($value != null)
+            $this->setValue($value);
+    }
 	
-	// Constructor/s.
+    // "Main" Methods.
+
+    public static function allowed() { return new self(self::CT_ALLOWED); }
+
+    public static function notAllowed() { return new self(self::CT_NOT_ALLOWED); }
 	
-	public function __construct($value = null)
-	{
-		if ($value != null)
-			$this->setValue($value);
-	}
-	
-	// "Main" Methods.
-	
-	public static function allowed() { return new self(self::CT_ALLOWED); }
-	
-	public static function notAllowed() { return new self(self::CT_NOT_ALLOWED); }
-	
-	// "Set" Methods.
-	
-	public function setValue($value)
-	{
-		if ($value == self::CT_ALLOWED || $value == self::CT_NOT_ALLOWED)
-			$this->selOpt = $value;
-		else if (is_bool($value))
-		{
-			if ($value)
-				$this->selOpt = self::CT_ALLOWED;
-			else
-				$this->selOpt = self::CT_NOT_ALLOWED;
-		}
-		else
-			new Error("ColumnNull", "You have used a wrong value in the method <i>setValue</i>.");
-	}
-	
-	// "Get" Methods.
-	
-	public function getValue()
-	{
-		return $this->selOpt;
-	}
+    // "Set" Methods.
+
+    public function setValue($value)
+    {
+        if ($value == self::CT_ALLOWED || $value == self::CT_NOT_ALLOWED)
+            $this->selOpt = $value;
+        else if (is_bool($value))
+        {
+            if ($value)
+                $this->selOpt = self::CT_ALLOWED;
+            else
+                $this->selOpt = self::CT_NOT_ALLOWED;
+        }
+        else
+            new Error("ColumnNull", "You have used a wrong value in the method <i>setValue</i>.");
+    }
+
+    // "Get" Methods.
+
+    public function getValue()
+    {
+        return $this->selOpt;
+    }
 }
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -35,118 +35,118 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class EasyGrant
 {
-	// "Class" Constants.
-	
-	const PRIV_ALL           = "ALL";
-	const PRIV_SELECT        = "SELECT";
-	const PRIV_UPDATE        = "UPDATE";
-	const PRIV_INSERT        = "INSERT";
-	const PRIV_DELETE        = "DELETE";
+    // "Class" Constants.
 
-	// "Core" Variables.
-	
-	private static $VAL_USR  = null;
-	private static $VAL_PRIV = null;
-	private static $VAL_OBJ  = null;
+    const PRIV_ALL           = "ALL";
+    const PRIV_SELECT        = "SELECT";
+    const PRIV_UPDATE        = "UPDATE";
+    const PRIV_INSERT        = "INSERT";
+    const PRIV_DELETE        = "DELETE";
 
-	// "Set" Methods.
+    // "Core" Variables.
 
-	public static function setUser($value)
-	{
-		self::$VAL_USR = mysql_real_escape_string($value);
-	}
-	
-	public static function setPrivileges($params = null)
-	{
-		if (!is_array($params))
-			$params = func_get_args();
-		
-		foreach ($params as $value)
-		{
-			if ($value == "ALL" ||
-				$value == "SELECT" ||
-				$value == "UPDATE" ||
-				$value == "INSERT" ||
-				$value == "DELETE")
-				self::$VAL_PRIV[] = $value;
-			else
-				new Error("EasyGrant", "You have used a wrong option in the method <i>setPrivileges</i>.");
-		}
-	}
-	
-	public static function setObject($value)
-	{
-		$dqb = new DataQueryBuilder();
-	
-		self::$VAL_OBJ = mysql_real_escape_string($value);
-		
-		self::$VAL_OBJ = $dqb->buildTableSelection(new TableSelection(self::$VAL_OBJ), null);
-	}
-	
-	// "Get" Methods.
-	
-	public static function getUser() { return self::$VAL_USR; }
-	
-	public static function getPrivileges() { return self::$VAL_PRIV; }
-	
-	public static function getObject() { return self::$VAL_OBJ; }
+    private static $VAL_USR  = null;
+    private static $VAL_PRIV = null;
+    private static $VAL_OBJ  = null;
 
-	// "Main" Methods.
+    // "Set" Methods.
+
+    public static function setUser($value)
+    {
+        self::$VAL_USR = mysql_real_escape_string($value);
+    }
 	
-	public static function execute()
-	{
-		// Fetch Hostname. 
+    public static function setPrivileges($params = null)
+    {
+        if (!is_array($params))
+            $params = func_get_args();
+
+        foreach ($params as $value)
+        {
+            if ($value == "ALL" ||
+                $value == "SELECT" ||
+                $value == "UPDATE" ||
+                $value == "INSERT" ||
+                $value == "DELETE")
+                self::$VAL_PRIV[] = $value;
+            else
+                new Error("EasyGrant", "You have used a wrong option in the method <i>setPrivileges</i>.");
+        }
+    }
+
+    public static function setObject($value)
+    {
+        $dqb = new DataQueryBuilder();
+
+        self::$VAL_OBJ = mysql_real_escape_string($value);
+
+        self::$VAL_OBJ = $dqb->buildTableSelection(new TableSelection(self::$VAL_OBJ), null);
+    }
 	
-		$dbConfig = new DBConfig();
-		
-		$hostname = $dbConfig->getHostname();
-		
-		// Create Privileges List.
-		
-		$privileges = "";
-		
-		for ($i = 0; $i < count(self::$VAL_PRIV); $i ++)
-		{
-			if ($i > 0)
-				$privileges .= ", ";
-			
-			$privileges .= self::$VAL_PRIV[$i];
-		}
-		
-		// Perform the Query.
-		
-		$query = "GRANT $privileges ON " . self::$VAL_OBJ . " TO '" . self::$VAL_USR . "'@'$hostname'";
+    // "Get" Methods.
+
+    public static function getUser() { return self::$VAL_USR; }
+
+    public static function getPrivileges() { return self::$VAL_PRIV; }
+
+    public static function getObject() { return self::$VAL_OBJ; }
+
+    // "Main" Methods.
+
+    public static function execute()
+    {
+        // Fetch Hostname. 
+
+        $dbConfig = new DBConfig();
+
+        $hostname = $dbConfig->getHostname();
+
+        // Create Privileges List.
+
+        $privileges = "";
+
+        for ($i = 0; $i < count(self::$VAL_PRIV); $i ++)
+        {
+            if ($i > 0)
+                $privileges .= ", ";
+
+            $privileges .= self::$VAL_PRIV[$i];
+        }
+
+        // Perform the Query.
+
+        $query = "GRANT $privileges ON " . self::$VAL_OBJ . " TO '" . self::$VAL_USR . "'@'$hostname'";
+
+        new DebugInfo("EasyUser", $query); // Print debug info.
+
+        $result = mysql_query($query); // Drop the table if exists.
+
+        if (!$result)
+            new Error("EasyUser", "The query could not be run.");
+
+        // Reset Variables.
+
+        self::$VAL_USR  = null;
+        self::$VAL_PRIV = null;
+        self::$VAL_OBJ  = null;
+    }
 	
-		new DebugInfo("EasyUser", $query); // Print debug info.
+    // "Other" Methods.
+
+    public static function privileges($params = null)
+    {
+        self::setPrivileges(func_get_args());
+    }
 	
-		$result = mysql_query($query); // Drop the table if exists.
-		
-		if (!$result)
-			new Error("EasyUser", "The query could not be run.");
+    public static function toUser($value)
+    {
+        self::setUser($value);
+    }
 	
-		// Reset Variables.
-		
-		self::$VAL_USR  = null;
-		self::$VAL_PRIV = null;
-		self::$VAL_OBJ  = null;
-	}
-	
-	// "Other" Methods.
-	
-	public static function privileges($params = null)
-	{
-		self::setPrivileges(func_get_args());
-	}
-	
-	public static function toUser($value)
-	{
-		self::setUser($value);
-	}
-	
-	public static function onObject($value)
-	{
-		self::setObject($value);
-	}
+    public static function onObject($value)
+    {
+        self::setObject($value);
+    }
 }
 
 ?>

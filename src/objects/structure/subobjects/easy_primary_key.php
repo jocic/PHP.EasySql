@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -35,32 +35,32 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class EasyPrimaryKey
 {
-	// "Core" Variables.
+    // "Core" Variables.
+
+    private $columnName = null;
+
+    // Constructor/s.
+
+    public function __construct($value = null)
+    {
+        if ($value != null)
+            $this->setValue($value);
+    }
 	
-	private $columnName = null;
-	
-	// Constructor/s.
-	
-	public function __construct($value = null)
-	{
-		if ($value != null)
-			$this->setValue($value);
-	}
-	
-	// "Use" Methods.
-	
-	public static function useValue($value) { return new self($value); }
-	
-	// "Set" Methods.
-	
-	public function setValue($value)
-	{
-		$this->columnName = mysql_real_escape_string($value);
-	}
-	
-	// "Get" Methods.
-	
-	public function getValue() { return $this->columnName; }
+    // "Use" Methods.
+
+    public static function useValue($value) { return new self($value); }
+
+    // "Set" Methods.
+
+    public function setValue($value)
+    {
+        $this->columnName = mysql_real_escape_string($value);
+    }
+
+    // "Get" Methods.
+
+    public function getValue() { return $this->columnName; }
 }
 
 ?>

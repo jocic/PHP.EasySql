@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -35,132 +35,132 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class EasyUser
 {
-	// "Main" Methods.
+    // "Main" Methods.
+
+    public static function addUser($username, $password)
+    {
+        // Fetch Hostname. 
+
+        $dbConfig = new DBConfig();
+
+        $hostname = $dbConfig->getHostname();
+
+        // Filter Variables.
+
+        $username = mysql_real_escape_string($username);
+        $password = mysql_real_escape_string($password);
+        $hostname = mysql_real_escape_string($hostname);
+
+        // Perform the Query.
+
+        $query = "CREATE USER '$username'@'$hostname' IDENTIFIED BY '$password'";
+
+        new DebugInfo("EasyUser", $query); // Print debug info.
+
+        $result = mysql_query($query); // Drop the table if exists.
+
+        if (!$result)
+            new Error("EasyUser", "The query could not be run.");
+    }
 	
-	public static function addUser($username, $password)
-	{
-		// Fetch Hostname. 
-	
-		$dbConfig = new DBConfig();
+    public static function renameUser($oldUsername, $newUsername)
+    {
+        // Fetch Hostname. 
+
+        $dbConfig = new DBConfig();
+
+        $hostname = $dbConfig->getHostname();
+
+        // Filter Variables.
+
+        $oldUsername = mysql_real_escape_string($oldUsername);
+        $newUsername = mysql_real_escape_string($newUsername);
+        $hostname    = mysql_real_escape_string($hostname);
+
+        // Perform the Query.
+
+        $query = "RENAME USER '$oldUsername'@'$hostname' TO '$newUsername'@'$hostname'";
+
+        new DebugInfo("EasyUser", $query); // Print debug info.
+
+        $result = mysql_query($query); // Drop the table if exists.
+
+        if (!$result)
+            new Error("EasyUser", "The query could not be run.");
+    }
+
+    public static function removeUser($username)
+    {
+        // Fetch Hostname. 
+
+        $dbConfig = new DBConfig();
+
+        $hostname = $dbConfig->getHostname();
+
+        // Filter Variables.
+
+        $username = mysql_real_escape_string($username);
+        $hostname = mysql_real_escape_string($hostname);
+
+        // Perform the Query.
+
+        $query = "DROP USER '$username'@'$hostname'";
+
+        new DebugInfo("EasyUser", $query); // Print debug info.
+
+        $result = mysql_query($query); // Drop the table if exists.
+
+        if (!$result)
+            new Error("EasyUser", "The query could not be run.");
+    }
+
+    public static function setPassword($username, $password)
+    {
+        // Fetch Hostname. 
+
+        $dbConfig = new DBConfig();
+
+        $hostname = $dbConfig->getHostname();
+
+        // Filter Variables.
+
+        $username = mysql_real_escape_string($username);
+        $password = mysql_real_escape_string($password);
+        $hostname = mysql_real_escape_string($hostname);
 		
-		$hostname = $dbConfig->getHostname();
+        // Perform the Query.
+
+        $query = "SET PASSWORD FOR '$username'@'$hostname' = PASSWORD('$password')";
+
+        new DebugInfo("EasyUser", $query); // Print debug info.
+
+        $result = mysql_query($query); // Drop the table if exists.
+
+        if (!$result)
+            new Error("EasyUser", "The query could not be run.");
+    }
 	
-		// Filter Variables.
+    // Short "Main" Methods.
+
+    public static function add($username, $password)
+    {
+        self::addUser($username, $password);
+    }
+
+    public static function rename($oldUsername, $newUsername)
+    {
+        self::renameUser($oldUsername, $newUsername);
+    }
 	
-		$username = mysql_real_escape_string($username);
-		$password = mysql_real_escape_string($password);
-		$hostname = mysql_real_escape_string($hostname);
-		
-		// Perform the Query.
-		
-		$query = "CREATE USER '$username'@'$hostname' IDENTIFIED BY '$password'";
+    public static function remove($username)
+    {
+        self::removeUser($username);
+    }
 	
-		new DebugInfo("EasyUser", $query); // Print debug info.
-	
-		$result = mysql_query($query); // Drop the table if exists.
-		
-		if (!$result)
-			new Error("EasyUser", "The query could not be run.");
-	}
-	
-	public static function renameUser($oldUsername, $newUsername)
-	{
-		// Fetch Hostname. 
-	
-		$dbConfig = new DBConfig();
-		
-		$hostname = $dbConfig->getHostname();
-	
-		// Filter Variables.
-	
-		$oldUsername = mysql_real_escape_string($oldUsername);
-		$newUsername = mysql_real_escape_string($newUsername);
-		$hostname    = mysql_real_escape_string($hostname);
-		
-		// Perform the Query.
-		
-		$query = "RENAME USER '$oldUsername'@'$hostname' TO '$newUsername'@'$hostname'";
-	
-		new DebugInfo("EasyUser", $query); // Print debug info.
-	
-		$result = mysql_query($query); // Drop the table if exists.
-		
-		if (!$result)
-			new Error("EasyUser", "The query could not be run.");
-	}
-	
-	public static function removeUser($username)
-	{
-		// Fetch Hostname. 
-	
-		$dbConfig = new DBConfig();
-		
-		$hostname = $dbConfig->getHostname();
-	
-		// Filter Variables.
-	
-		$username = mysql_real_escape_string($username);
-		$hostname = mysql_real_escape_string($hostname);
-		
-		// Perform the Query.
-		
-		$query = "DROP USER '$username'@'$hostname'";
-	
-		new DebugInfo("EasyUser", $query); // Print debug info.
-	
-		$result = mysql_query($query); // Drop the table if exists.
-		
-		if (!$result)
-			new Error("EasyUser", "The query could not be run.");
-	}
-	
-	public static function setPassword($username, $password)
-	{
-		// Fetch Hostname. 
-	
-		$dbConfig = new DBConfig();
-		
-		$hostname = $dbConfig->getHostname();
-	
-		// Filter Variables.
-	
-		$username = mysql_real_escape_string($username);
-		$password = mysql_real_escape_string($password);
-		$hostname = mysql_real_escape_string($hostname);
-		
-		// Perform the Query.
-		
-		$query = "SET PASSWORD FOR '$username'@'$hostname' = PASSWORD('$password')";
-	
-		new DebugInfo("EasyUser", $query); // Print debug info.
-	
-		$result = mysql_query($query); // Drop the table if exists.
-		
-		if (!$result)
-			new Error("EasyUser", "The query could not be run.");
-	}
-	
-	// Short "Main" Methods.
-	
-	public static function add($username, $password)
-	{
-		self::addUser($username, $password);
-	}
-	
-	public static function rename($oldUsername, $newUsername)
-	{
-		self::renameUser($oldUsername, $newUsername);
-	}
-	
-	public static function remove($username)
-	{
-		self::removeUser($username);
-	}
-	
-	public static function setPass($username, $password)
-	{
-		self::setPassword($username, $password);
-	}
+    public static function setPass($username, $password)
+    {
+        self::setPassword($username, $password);
+    }
 }
 
 ?>

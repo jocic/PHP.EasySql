@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -35,32 +35,32 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class IPHandler
 {
-	// "Main" Methods.
-	
-	public function checkIP()
-	{
-		$logTable = new EasyTable("sql_inj_logs");
-		
-		if ($logTable->exists())
-		{
-			$ip = $_SERVER["REMOTE_ADDR"];
-		
-			EasyGet::setParameters
-			(
-				new ColumnSelection("id"),
-				new TableSelection($logTable->getName()),
-				new ArgumentSelection(new Argument("ip_address", "=", $ip))
-			);
-			
-			if (EasyGet::execute() != null) // If the attack was attempted.
-			{
-				if (EasyCore::getBannedRedirectLocation() != null)
-					exit(header("location: " . EasyCore::getBannedRedirectLocation()));
-				else
-					exit("<p>Your IP Address was banned. Sorry.</p>");
-			}
-		}
-	}
+    // "Main" Methods.
+
+    public function checkIP()
+    {
+        $logTable = new EasyTable("sql_inj_logs");
+
+        if ($logTable->exists())
+        {
+            $ip = $_SERVER["REMOTE_ADDR"];
+
+            EasyGet::setParameters
+            (
+                new ColumnSelection("id"),
+                new TableSelection($logTable->getName()),
+                new ArgumentSelection(new Argument("ip_address", "=", $ip))
+            );
+
+            if (EasyGet::execute() != null) // If the attack was attempted.
+            {
+                if (EasyCore::getBannedRedirectLocation() != null)
+                    exit(header("location: " . EasyCore::getBannedRedirectLocation()));
+                else
+                    exit("<p>Your IP Address was banned. Sorry.</p>");
+            }
+        }
+}
 }
 
 ?>

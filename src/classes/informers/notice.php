@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -35,13 +35,13 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class Notice
 {
-	// Constructor/s.
+    // Constructor/s.
 
-	public function __construct($noticeLocation, $noticeInfo)
-	{
-		if (EasyCore::getShowFrameworkNotices())
-			echo "<p><b>Notice:</b> $noticeInfo - ($noticeLocation)</p>\n"; // Print Notice.
-	}
+    public function __construct($noticeLocation, $noticeInfo)
+    {
+        if (EasyCore::getShowFrameworkNotices())
+            echo "<p><b>Notice:</b> $noticeInfo - ($noticeLocation)</p>\n"; // Print Notice.
+    }
 }
 
 ?>

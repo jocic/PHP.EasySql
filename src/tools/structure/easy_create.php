@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -37,95 +37,95 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class EasyCreate
 {
-	// "Class" Constants.
-	
-	const ECM_DO_NOTHING_IF_EXISTS = 0; // Default Mode.
-	const ECM_DROP_IF_EXISTS       = 1;
-	const ECM_CREATE_WDN		   = 2;
+    // "Class" Constants.
 
-	// "Control" Variables.
+    const ECM_DO_NOTHING_IF_EXISTS = 0; // Default Mode.
+    const ECM_DROP_IF_EXISTS       = 1;
+    const ECM_CREATE_WDN           = 2;
+
+    // "Control" Variables.
 	
-	private static $VAR_MODE       = 0;
-	private static $VAR_ENGINE     = "InnoDB"; // Default is "InnoDB";
-	private static $VAR_CHARSET    = "UTF8"; // Default is "UTF8".
-	private static $VAR_COLLATION  = "utf8_general_ci"; // Default is "utf8_general_ci".
+    private static $VAR_MODE       = 0;
+    private static $VAR_ENGINE     = "InnoDB"; // Default is "InnoDB";
+    private static $VAR_CHARSET    = "UTF8"; // Default is "UTF8".
+    private static $VAR_COLLATION  = "utf8_general_ci"; // Default is "utf8_general_ci".
 	
-	// "Set" Methods.
+    // "Set" Methods.
+
+    public static function setMode($value)
+    {
+        if ($value != self::ECM_DO_NOTHING_IF_EXISTS &&
+            $value != self::ECM_DROP_IF_EXISTS &&
+            $value != self::ECM_CREATE_WDN)
+        {
+            new Notice("EasyCreate", "Illegal value was used in the method <i>setMode</i>.");
+
+            $value = self::ECM_DO_NOTHING_IF_EXISTS; // Default Mode.
+        }
+
+        self::$VAR_MODE = $value;
+    }
 	
-	public static function setMode($value)
-	{
-		if ($value != self::ECM_DO_NOTHING_IF_EXISTS &&
-			$value != self::ECM_DROP_IF_EXISTS &&
-			$value != self::ECM_CREATE_WDN)
-		{
-			new Notice("EasyCreate", "Illegal value was used in the method <i>setMode</i>.");
-			
-			$value = self::ECM_DO_NOTHING_IF_EXISTS; // Default Mode.
-		}
+    public static function setEngine($value) { self::$VAR_ENGINE = $value; }
+
+    public static function setDefaultCharacterSet($value) { self::$VAR_CHARSET = $value; }
+
+    public static function setDefaultCollation($value) { self::$VAR_COLLATION = $value; }
+	
+    // "Get" Methods.
+
+    public static function getMode() { return self::$VAR_MODE; }
+
+    public static function getEngine() { return self::$VAR_ENGINE; }
+
+    public static function getDefaultCharacterSet() { return self::$VAR_CHARSET; }
+
+    public static function getDefaultCollation() { return self::$VAR_COLLATION; }
+	
+    // "Main" Methods.
+
+    public static function execute($object)
+    {
+        // "Mode" Checks.
+
+        if (self::$VAR_MODE == self::ECM_DO_NOTHING_IF_EXISTS && $object->exists())
+            return;
+        else if (self::$VAR_MODE == self::ECM_DROP_IF_EXISTS && $object->exists())
+            EasyDrop::execute($object);
+        else if (self::$VAR_MODE == self::ECM_CREATE_WDN && $object->exists())
+        {
+            $name = $object->getName();
+
+            $sufix = 1;
+
+            while ($object->exists())
+            {
+                $sufix ++;
+
+                $object->setName($name . "_" . $sufix);
+            }
+        }
 		
-		self::$VAR_MODE = $value;
-	}
-	
-	public static function setEngine($value) { self::$VAR_ENGINE = $value; }
-	
-	public static function setDefaultCharacterSet($value) { self::$VAR_CHARSET = $value; }
-	
-	public static function setDefaultCollation($value) { self::$VAR_COLLATION = $value; }
-	
-	// "Get" Methods.
-	
-	public static function getMode() { return self::$VAR_MODE; }
-	
-	public static function getEngine() { return self::$VAR_ENGINE; }
-	
-	public static function getDefaultCharacterSet() { return self::$VAR_CHARSET; }
-	
-	public static function getDefaultCollation() { return self::$VAR_COLLATION; }
-	
-	// "Main" Methods.
-	
-	public static function execute($object)
-	{
-		// "Mode" Checks.
-	
-		if (self::$VAR_MODE == self::ECM_DO_NOTHING_IF_EXISTS && $object->exists())
-			return;
-		else if (self::$VAR_MODE == self::ECM_DROP_IF_EXISTS && $object->exists())
-			EasyDrop::execute($object);
-		else if (self::$VAR_MODE == self::ECM_CREATE_WDN && $object->exists())
-		{
-			$name = $object->getName();
+        // Build the query.
+
+        $queryBuilder = new StructureQueryBuilder();
+
+        $query = $queryBuilder->getQuery($object, StructureQueryBuilder::TP_CREATE);
+
+        new DebugInfo("EasyCreate", $query); // Print debug info.
 		
-			$sufix = 1;
-			
-			while ($object->exists())
-			{
-				$sufix ++;
-				
-				$object->setName($name . "_" . $sufix);
-			}
-		}
-		
-		// Build the query.
-		
-		$queryBuilder = new StructureQueryBuilder();
-		
-		$query = $queryBuilder->getQuery($object, StructureQueryBuilder::TP_CREATE);
-		
-		new DebugInfo("EasyCreate", $query); // Print debug info.
-		
-		// Perform the Query.
+        // Perform the Query.
         
         $result = mysql_query($query);
 
         if (!$result)
-			new Error("EasyCreate", "The query could not be run.");
-	}
+            new Error("EasyCreate", "The query could not be run.");
+    }
 	
-	public static function structure($object)
-	{
-		self::execute($object);
-	}
+    public static function structure($object)
+    {
+        self::execute($object);
+    }
 }
 
 ?>

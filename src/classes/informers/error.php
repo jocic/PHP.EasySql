@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -35,21 +35,21 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class Error
 {
-	// Constructor/s.
+    // Constructor/s.
 
-	public function __construct($errorLocation, $errorInfo)
-	{
-		if (EasyCore::getShowServerErrors()) // Print server error.
-		{
-			$errno = mysql_errno();
-		
-			if ($errno)
-				echo "<p><b>Server Error:</b> " . mysql_error() . " - Error Number: $errno</p>\n";
-		}
-	
-		if (EasyCore::getShowFrameworkErrors())
-			die("<p><b>Error:</b> $errorInfo - ($errorLocation)</p>\n"); // Die + Print framework error.
-	}
+    public function __construct($errorLocation, $errorInfo)
+    {
+        if (EasyCore::getShowServerErrors()) // Print server error.
+        {
+            $errno = mysql_errno();
+
+            if ($errno)
+                echo "<p><b>Server Error:</b> " . mysql_error() . " - Error Number: $errno</p>\n";
+        }
+
+        if (EasyCore::getShowFrameworkErrors())
+            die("<p><b>Error:</b> $errorInfo - ($errorLocation)</p>\n"); // Die + Print framework error.
+    }
 }
 
 ?>

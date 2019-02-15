@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -37,64 +37,64 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class TableSelection
 {
-	// "Core" Variables.
-	
-	private $tables = null;
-	
-	// Constructor/s.
-	
-	public function __construct($params = null)
-	{
-		if ($params != null)
-		{
-			if (is_array($params))
-				$this->addTables($params);
-			else
-				$this->addTables(func_get_args());
-		}
-	}
-	
-	// "Add" Methods.
-	
-	public function addTable($table) { $this->tables[] = mysql_real_escape_string(trim($table)); }
-	
-	public function addTables($tables)
-	{
-		if (is_array($tables))
-		{
-			foreach ($tables as $value)
-				$this->addTable($value);
-		}
-		else $this->addTables(func_get_args());
-	}
-	
-	// "Remove" Methods.
-	
-	public function removeTableAt($position)
-	{
-		unset($this->tables[$position]);
-		
-		$this->tables = array_values($this->tables);
-	}
-	
-	public function removeAllTables()
-	{
-		$this->tables = null;
-	}
-	
-	// "Get" Methods.
-	
-	public function getTableAt($position) { return $this->tables[$position]; }
-	
-	public function getTables() { return $this->tables; }
-	
-	// "Set" Methods.
-	
-	public function setTableAt($position, $table) { $this->tables[$position] = mysql_real_escape_string($table); }
-	
-	// "Count" Methods.
-	
-	public function countTables() { return count($this->tables); }
+    // "Core" Variables.
+
+    private $tables = null;
+
+    // Constructor/s.
+
+    public function __construct($params = null)
+    {
+        if ($params != null)
+        {
+            if (is_array($params))
+                $this->addTables($params);
+            else
+                $this->addTables(func_get_args());
+        }
+    }
+
+    // "Add" Methods.
+
+    public function addTable($table) { $this->tables[] = mysql_real_escape_string(trim($table)); }
+
+    public function addTables($tables)
+    {
+        if (is_array($tables))
+        {
+            foreach ($tables as $value)
+                $this->addTable($value);
+        }
+        else $this->addTables(func_get_args());
+    }
+
+    // "Remove" Methods.
+
+    public function removeTableAt($position)
+    {
+        unset($this->tables[$position]);
+
+        $this->tables = array_values($this->tables);
+    }
+
+    public function removeAllTables()
+    {
+        $this->tables = null;
+    }
+
+    // "Get" Methods.
+
+    public function getTableAt($position) { return $this->tables[$position]; }
+
+    public function getTables() { return $this->tables; }
+
+    // "Set" Methods.
+
+    public function setTableAt($position, $table) { $this->tables[$position] = mysql_real_escape_string($table); }
+
+    // "Count" Methods.
+
+    public function countTables() { return count($this->tables); }
 }
 
 ?>

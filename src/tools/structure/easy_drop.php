@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -37,28 +37,28 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class EasyDrop
 {
-	// "Other" Methods.
+    // "Other" Methods.
 
-	public static function structure($object)
-	{
-		self::execute($object);
-	}
+    public static function structure($object)
+    {
+        self::execute($object);
+    }
 	
-	public static function execute($object)
-	{
-		$queryBuilder = new StructureQueryBuilder();
+    public static function execute($object)
+    {
+        $queryBuilder = new StructureQueryBuilder();
 
-		// Drop Object.
-	
-		$query = $queryBuilder->getQuery($object, StructureQueryBuilder::TP_DROP);
-	
-		new DebugInfo("EasyDrop", $query); // Print debug info.
-	
-		$result = mysql_query($query); // Drop the table if exists.
-		
-		if (!$result)
-			new Error("EasyDrop", "The query could not be run.");
-	}
+        // Drop Object.
+
+        $query = $queryBuilder->getQuery($object, StructureQueryBuilder::TP_DROP);
+
+        new DebugInfo("EasyDrop", $query); // Print debug info.
+
+        $result = mysql_query($query); // Drop the table if exists.
+
+        if (!$result)
+            new Error("EasyDrop", "The query could not be run.");
+    }
 }
 
 ?>

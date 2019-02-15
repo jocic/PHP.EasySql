@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -37,64 +37,101 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class ValueSelection
 {
-	// "Core" Variables.
+    // "Options" Constants.
+    
+    const OPT_DEFAULT = 0;
+    const OPT_ENCODE  = 1;
+    
+    // "Core" Variables.
+
+    private $values = null;
+    private $option = 0;
+
+    // "Constructor/s".
+
+    public function __construct($params = null)
+    {
+        if ($params != null)
+        {
+            if (is_array($params))
+                $this->addValues($params);
+            else
+                $this->addValues(func_get_args());
+        }
+    }
 	
-	private $values = null;
+    // "Add" Methods.
+
+    public function addValue($value)
+    {   
+        if ($this->getOption() == self::OPT_ENCODE)
+            $this->values[] = mysql_real_escape_string(htmlentities($value));
+        else
+            $this->values[] = mysql_real_escape_string($value);
+    }
+
+    public function addValues($values)
+    {
+        if (is_array($values))
+        {
+            foreach ($values as $value)
+                $this->addValue($value);
+        }
+        else $this->addValues(func_get_args());
+    }
 	
-	// "Constructor/s".
+    // "Remove" Methods.
+
+    public function removeValueAt($position)
+    {
+        unset($this->values[$position]);
+
+        $this->values = array_values($this->values);
+    }
 	
-	public function __construct($params = null)
-	{
-		if ($params != null)
-		{
-			if (is_array($params))
-				$this->addValues($params);
-			else
-				$this->addValues(func_get_args());
-		}
-	}
+    public function removeAllValues()
+    {
+        $this->values = null;
+    }
 	
-	// "Add" Methods.
-	
-	public function addValue($value) { $this->values[] = mysql_real_escape_string($value); }
-	
-	public function addValues($values)
-	{
-		if (is_array($values))
-		{
-			foreach ($values as $value)
-				$this->addValue($value);
-		}
-		else $this->addValues(func_get_args());
-	}
-	
-	// "Remove" Methods.
-	
-	public function removeValueAt($position)
-	{
-		unset($this->values[$position]);
-		
-		$this->values = array_values($this->values);
-	}
-	
-	public function removeAllValues()
-	{
-		$this->values = null;
-	}
-	
-	// "Set" Methods.
-	
-	public function setValueAt($position, $value) { $this->values[$position] = mysql_real_escape_string($value); }
-	
-	// "Get" Methods.
-	
-	public function getValueAt($position) { return $this->values[$position]; }
-	
-	public function getValues() { return $this->values; }
-	
-	// "Count" Methods.
-	
-	public function countValues() { return count($this->values); }
+    // "Set" Methods.
+
+    public function setValueAt($position, $value)
+    {
+        if ($this->option == self::OPT_ENCODE)
+            $this->values[$position] = mysql_real_escape_string($value);
+        else
+            $this->values[$position] = mysql_real_escape_string($value);
+    }
+    
+    public function setOption($opt)
+    {
+        $this->option = $opt;
+    }
+
+    // "Get" Methods.
+
+    public function getValueAt($position)
+    {
+        return $this->values[$position];
+    }
+
+    public function getValues()
+    {
+        return $this->values;
+    }
+    
+    public function getOption()
+    {
+        return $this->option;
+    }
+
+    // "Count" Methods.
+
+    public function countValues()
+    {
+        return count($this->values);
+    }
 }
 
 ?>

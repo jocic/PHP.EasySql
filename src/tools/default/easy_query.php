@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -35,21 +35,21 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class EasyQuery
 {
-	// "Other" Methods.
-	
-	public static function execute($query = null)
-	{
-		new Notice("EasyQuery", "Using EasyQuery tool is <strong>unsafe</strong> and should be used only if it's absolutley necessary!.");
-	
-		new DebugInfo("EasyQuery", $query); // Print debug info.
-		
-		// Perform the Query.
-        
+    // "Other" Methods.
+
+    public static function execute($query = null)
+    {
+        new Notice("EasyQuery", "Using EasyQuery tool is <strong>unsafe</strong> and should be used only if it's absolutley necessary!.");
+
+        new DebugInfo("EasyQuery", $query); // Print debug info.
+
+        // Perform the Query.
+
         $result = mysql_query($query);
-		
+
         if (!$result)
-			new Notice("EasyQuery", "The query could not be run.");
-	}
+            new Notice("EasyQuery", "The query could not be run.");
+    }
 }
 
 ?>

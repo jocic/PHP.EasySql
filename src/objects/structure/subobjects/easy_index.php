@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -35,76 +35,76 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class EasyIndex
 {
-	// "Core" Variables.
-	
-	private $indexName    = null;
-	private $indexOldName = null;
-	private $columnName   = null;
-	private $uniqueValue  = false;
-	
-	// Constructor/s.
-	
-	public function __construct($params = null)
-	{
-		$params = func_get_args();
-	
-		if ($params != null)
-		{
-			if (count($params) == 3)
-			{
-				$this->setName($params[0]);
-				
-				if (count($params) > 1)
-					$this->setColumnName($params[1]);
-				
-				if (count($params) > 2)
-					$this->setUniqueValue($params[2]);
-			}
-			else
-				new Notice("EasyIndex", "You need to pass three parameters in the constructor. Order is important.");
-		}
-	}
-	
-	// "Set" Methods.
-	
-	public function setName($value)
-	{
-		$this->indexName = mysql_real_escape_string($value);
-	}
-	
-	public function setOldName($value)
-	{
-		$this->indexOldName = mysql_real_escape_string($value);
-	}
-	
-	public function setColumnName($value)
-	{
-		$this->columnName = mysql_real_escape_string($value);
-	}
-	
-	public function setUniqueValue($value)
-	{
-		if (is_bool($value))
-			$this->uniqueValue = $value;
-		else
-			new Notice("EasyIndex", "Value in the method <i>setUniqueValue</i> must be true or false. Default is false.");
-	}
-	
-	// "Get" Methods.
-	
-	public function getName() { return $this->indexName; }
-	
-	public function getOldName()
-	{
-		if ($this->indexName == null)
-			return $this->indexName;
-		else
-			return $this->indexOldName;
-	}
-	
-	public function getColumnName() { return $this->columnName; }
-	
-	public function getUniqueValue() { return $this->uniqueValue; }
+    // "Core" Variables.
+
+    private $indexName    = null;
+    private $indexOldName = null;
+    private $columnName   = null;
+    private $uniqueValue  = false;
+
+    // Constructor/s.
+
+    public function __construct($params = null)
+    {
+        $params = func_get_args();
+
+        if ($params != null)
+        {
+            if (count($params) == 3)
+            {
+                $this->setName($params[0]);
+
+                if (count($params) > 1)
+                    $this->setColumnName($params[1]);
+
+                if (count($params) > 2)
+                    $this->setUniqueValue($params[2]);
+            }
+            else
+                new Notice("EasyIndex", "You need to pass three parameters in the constructor. Order is important.");
+        }
+    }
+
+    // "Set" Methods.
+
+    public function setName($value)
+    {
+        $this->indexName = mysql_real_escape_string($value);
+    }
+
+    public function setOldName($value)
+    {
+        $this->indexOldName = mysql_real_escape_string($value);
+    }
+
+    public function setColumnName($value)
+    {
+        $this->columnName = mysql_real_escape_string($value);
+    }
+
+    public function setUniqueValue($value)
+    {
+        if (is_bool($value))
+            $this->uniqueValue = $value;
+        else
+            new Notice("EasyIndex", "Value in the method <i>setUniqueValue</i> must be true or false. Default is false.");
+    }
+
+    // "Get" Methods.
+
+    public function getName() { return $this->indexName; }
+
+    public function getOldName()
+    {
+        if ($this->indexName == null)
+            return $this->indexName;
+        else
+            return $this->indexOldName;
+    }
+
+    public function getColumnName() { return $this->columnName; }
+
+    public function getUniqueValue() { return $this->uniqueValue; }
 }
 
 ?>

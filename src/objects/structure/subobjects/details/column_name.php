@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -35,48 +35,48 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class ColumnName
 {
-	// "Core" Variables.
-	
-	private $columnName = null;
-	
-	// Constructor/s.
-	
-	public function __construct($value = null)
-	{
-		if ($value != null)
-			$this->setValue($value);
-	}
-	
-	// "Use" Methods.
-	
-	public static function useName($value) { return new self($value); }
-	
-	public static function useValue($value) { return new self($value); }
-	
-	// "Set" Methods.
-	
-	public function setName($value)
-	{
-		if (!is_string($value))
-			new Error("ColumnName", "Column name must be string.");
-		else if (strlen($value) > 30)
-			new Error("ColumnName", "Column name must be between 1 and 30 characters.");
-		else if (!preg_match("/^[a-z0-9_#$]+$/", $value))
-			new Error("ColumnName", "Column name constains illegal characters. You can use A-Z, 0-9, _, $ and #.");
-			
-		$this->columnName = mysql_real_escape_string($value);
-	}
-	
-	public function setValue($value)
-	{
-		self::setName($value);
-	}
-	
-	// "Get" Methods.
-	
-	public function getName() { return $this->columnName; }
-	
-	public function getValue() { return $this->columnName; }
+    // "Core" Variables.
+
+    private $columnName = null;
+
+    // Constructor/s.
+
+    public function __construct($value = null)
+    {
+        if ($value != null)
+            $this->setValue($value);
+    }
+
+    // "Use" Methods.
+
+    public static function useName($value) { return new self($value); }
+
+    public static function useValue($value) { return new self($value); }
+
+    // "Set" Methods.
+
+    public function setName($value)
+    {
+        if (!is_string($value))
+                new Error("ColumnName", "Column name must be string.");
+        else if (strlen($value) > 30)
+                new Error("ColumnName", "Column name must be between 1 and 30 characters.");
+        else if (!preg_match("/^[a-z0-9_#$]+$/", $value))
+                new Error("ColumnName", "Column name constains illegal characters. You can use A-Z, 0-9, _, $ and #.");
+
+        $this->columnName = mysql_real_escape_string($value);
+    }
+
+    public function setValue($value)
+    {
+        self::setName($value);
+    }
+
+    // "Get" Methods.
+
+    public function getName() { return $this->columnName; }
+
+    public function getValue() { return $this->columnName; }
 }
 
 ?>

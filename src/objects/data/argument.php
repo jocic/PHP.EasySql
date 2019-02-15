@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -37,59 +37,59 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class Argument
 {
-	// Class "Constants".
+    // Class "Constants".
+
+    const AO_AND = "AND";
+    const AO_OR  = "OR";
+
+    // "Core" Variables.
+
+    private $argumentValues = null;
+
+    // Constructor/s.
+
+    public function __construct($value = null)
+    {
+        if ($value != null)
+        {
+            if (is_array($value))
+                $this->setArgument($value);
+            else
+                $this->setArgument(func_get_args());
+        }
+    }
 	
-	const AO_AND = "AND";
-	const AO_OR  = "OR";
+    // "Add" Methods.
+
+    private function addArgumentValue($value)
+    {
+        if (is_string($value))
+            $this->argumentValues[] = mysql_real_escape_string(trim($value));
+        else
+            new Error("Argument", "Argument value need to be a string.");
+    }
 	
-	// "Core" Variables.
+    // "Set" Methods.
+
+    public function setArgument($values)
+    {
+        if (is_array($values))
+        {
+            $this->argumentValues = null;
+
+            if (count($values) == 3)
+            {
+                foreach ($values as $value)
+                    $this->addArgumentValue($value);
+            }
+            else new Notice("Argument", "Argument must consists from 3 parts.");
+        }
+        else $this->setArgument(func_get_args());
+    }
 	
-	private $argumentValues = null;
-	
-	// Constructor/s.
-	
-	public function __construct($value = null)
-	{
-		if ($value != null)
-		{
-			if (is_array($value))
-				$this->setArgument($value);
-			else
-				$this->setArgument(func_get_args());
-		}
-	}
-	
-	// "Add" Methods.
-	
-	private function addArgumentValue($value)
-	{
-		if (is_string($value))
-			$this->argumentValues[] = mysql_real_escape_string(trim($value));
-		else
-			new Error("Argument", "Argument value need to be a string.");
-	}
-	
-	// "Set" Methods.
-	
-	public function setArgument($values)
-	{
-		if (is_array($values))
-		{
-			$this->argumentValues = null;
-		
-			if (count($values) == 3)
-			{
-				foreach ($values as $value)
-					$this->addArgumentValue($value);
-			}
-			else new Notice("Argument", "Argument must consists from 3 parts.");
-		}
-		else $this->setArgument(func_get_args());
-	}
-	
-	// "Get" Methods.
-	
-	public function getArgument() { return $this->argumentValues; }
+    // "Get" Methods.
+
+    public function getArgument() { return $this->argumentValues; }
 }
 
 ?>

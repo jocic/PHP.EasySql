@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -35,190 +35,190 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class FilteredVariable
 {
-	// "Class" Constants.
-	
-	const TP_TEXT          = "TEXT";
-	const TP_TEXT_UPPR     = "TEXT_UPPERCASE";
-	const TP_TEXT_LOWR     = "TEXT_LOWERCASE";
-	const TP_NUMBERS       = "NUMBERS";
-	const TP_ALPHA_NUMERIC = "ALPHA_NUMERIC";
-	const TP_CUSTOM        = "CUSTOM";
+    // "Class" Constants.
 
-	// "Core" Variables.
-	
-	private $type          = null;
-	private $rlh           = null; // Redirect location for hack-attempts.
-	private $re            = null; // Regular expression.
-	private $value         = null;
+    const TP_TEXT          = "TEXT";
+    const TP_TEXT_UPPR     = "TEXT_UPPERCASE";
+    const TP_TEXT_LOWR     = "TEXT_LOWERCASE";
+    const TP_NUMBERS       = "NUMBERS";
+    const TP_ALPHA_NUMERIC = "ALPHA_NUMERIC";
+    const TP_CUSTOM        = "CUSTOM";
 
-	// "Control" Variables.
-	
-	private $checked 	   = true;
-	private $ahse          = false; // AHSE -> Anti-Hack system enabled.
-	
-	// "Constructor/s."
-	
-	public function __construct($param = null)
-	{
-		if ($param != null)
-			$this->setValue($param);
-	}
-	
-	// "Set" Variables.
-	
-	public function setType($param = null)
-	{
-		if ($param == null)
-			new Notice("FilteredVariable", "You haven't passed a value in the method <i>setType</i> or it is null.");
-		else
-			$this->type = $param;
-	}
-	
-	public function setRedirectHackLocation($param = null)
-	{
-		if ($param == null)
-			new Notice("IntegrityVariable", "You haven't passed a value in the method <i>setRedirectHackLocation</i> or it is null.");
-		else
-			$this->rlh = $param;
-	}
-	
-	public function setRegularExpression($param = null)
-	{
-		if ($param == null)
-			new Notice("FilteredVariable", "You haven't passed a value in the method <i>setRegularExpression</i> or it is null.");
-		else
-			$this->re = $param;
-	}
-	
-	public function setValue($param = null)
-	{
-		$this->checked = false;
-	
-		if ($param == null)
-		{
-			new Notice("FilteredVariable", "You haven't passed a value in the method <i>setValue</i> or it is null.");
-		}
-		else
-		{
-			if ($this->type == null)
-				new Notice("FilteredVariable", "You haven't initialized the \"type\" value of your variable. Variable filtration won't take effect.");
-		
-			$this->value = $param;
-		}
-	}
-	
-	// "Get" Variables.
-	
-	public function getType()
-	{
-		return $this->type;
-	}
-	
-	public function getRedirectHackLocation()
-	{
-		return $this->rlh;
-	}
-	
-	public function getRegularExpression()
-	{
-		return $this->re;
-	}
-	
-	public function getValue()
-	{
-		if ($this->type == null)
-		{
-			new Notice("FilteredVariable", "You haven't initialized the \"type\" value of your variable. Variable filtration won't take effect.");
-		}
-		else if (!$this->checked)
-		{
-			if ($this->ahse)
-			{
-				$ahs = new AntiHackSystem();
-				
-				$ahs->setRedirectLocation($this->rlh);
-				
-				$ahs->anlyzeVariable($this->value);
-			}
-		
-			if ($this->type == self::TP_TEXT)
-				$this->value = preg_replace("/[^a-zA-Z ]/", "", $this->value);
-			else if ($this->type == self::TP_TEXT_UPPR)
-				$this->value = preg_replace("/[^A-Z ]/", "", $this->value);
-			else if ($this->type == self::TP_TEXT_LOWR)
-				$this->value = preg_replace("/[^a-z ]/", "", $this->value);
-			else if ($this->type == self::TP_NUMBERS)
-				$this->value = preg_replace("/[^0-9]/", "", $this->value);
-			else if ($this->type == self::TP_ALPHA_NUMERIC)
-				$this->value = preg_replace("/[^a-zA-Z0-9 ]/", "", $this->value);
-			else if ($this->type == self::TP_CUSTOM)
-			{
-				if ($this->re == null)
-				{
-					new Notice("IntegrityVariable", "You haven't initialized the \"regular expression\" variable. Integrity check will have no effect.");
-					
-					$this->re = "//";
-				}
-				
-				$this->value = preg_replace($this->re, "", $this->value);
-			}
-			else
-				new Notice("FilteredVariable", "You didn't set a valid variable type.");
-				
-			$this->checked = true;
-		}
-		
-		return $this->value;
-	}
-	
-	// "Unset" Variables.
-	
-	public function unsetType()
-	{
-		$this->type = null;
-	}
-	
-	public function unsetRedirectHackLocation()
-	{
-		$this->rlh = null;
-	}
-	
-	public function unsetRegularExpression()
-	{
-		$this->re = null;
-	}
-	
-	public function unsetValue()
-	{
-		$this->value = null;
-	}
-	
-	// "Anti-Hack System" Methods.
-	
-	public function setAntiHackSystemValue($param = null)
-	{
-		if (is_bool($param))
-		{
-			$this->ahse = $param;
-		}
-		else
-			new Notice("IntegrityVariable", "You need to use variable of boolean type in <i>enableAntiHackSystem</i> method.");
-	}
-	
-	public function getAntiHackSystemValue()
-	{
-		return $this->ahse;
-	}
-	
-	public function enableAntiHackSystem($param = null)
-	{
-		$this->ahse = true;
-	}
-	
-	public function disableAntiHackSystem($param = null)
-	{
-		$this->ahse = false;
-	}
+    // "Core" Variables.
+
+    private $type          = null;
+    private $rlh           = null; // Redirect location for hack-attempts.
+    private $re            = null; // Regular expression.
+    private $value         = null;
+
+    // "Control" Variables.
+
+    private $checked 	   = true;
+    private $ahse          = false; // AHSE -> Anti-Hack system enabled.
+
+    // "Constructor/s."
+
+    public function __construct($param = null)
+    {
+        if ($param != null)
+            $this->setValue($param);
+    }
+
+    // "Set" Variables.
+
+    public function setType($param = null)
+    {
+        if ($param == null)
+            new Notice("FilteredVariable", "You haven't passed a value in the method <i>setType</i> or it is null.");
+        else
+            $this->type = $param;
+    }
+
+    public function setRedirectHackLocation($param = null)
+    {
+        if ($param == null)
+            new Notice("IntegrityVariable", "You haven't passed a value in the method <i>setRedirectHackLocation</i> or it is null.");
+        else
+            $this->rlh = $param;
+    }
+
+    public function setRegularExpression($param = null)
+    {
+        if ($param == null)
+            new Notice("FilteredVariable", "You haven't passed a value in the method <i>setRegularExpression</i> or it is null.");
+        else
+            $this->re = $param;
+    }
+
+    public function setValue($param = null)
+    {
+        $this->checked = false;
+
+        if ($param == null)
+        {
+            new Notice("FilteredVariable", "You haven't passed a value in the method <i>setValue</i> or it is null.");
+        }
+        else
+        {
+            if ($this->type == null)
+                new Notice("FilteredVariable", "You haven't initialized the \"type\" value of your variable. Variable filtration won't take effect.");
+
+            $this->value = $param;
+        }
+    }
+
+    // "Get" Variables.
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function getRedirectHackLocation()
+    {
+        return $this->rlh;
+    }
+
+    public function getRegularExpression()
+    {
+        return $this->re;
+    }
+
+    public function getValue()
+    {
+        if ($this->type == null)
+        {
+            new Notice("FilteredVariable", "You haven't initialized the \"type\" value of your variable. Variable filtration won't take effect.");
+        }
+        else if (!$this->checked)
+        {
+            if ($this->ahse)
+            {
+                $ahs = new AntiHackSystem();
+
+                $ahs->setRedirectLocation($this->rlh);
+
+                $ahs->anlyzeVariable($this->value);
+            }
+
+            if ($this->type == self::TP_TEXT)
+                $this->value = preg_replace("/[^a-zA-Z ]/", "", $this->value);
+            else if ($this->type == self::TP_TEXT_UPPR)
+                $this->value = preg_replace("/[^A-Z ]/", "", $this->value);
+            else if ($this->type == self::TP_TEXT_LOWR)
+                $this->value = preg_replace("/[^a-z ]/", "", $this->value);
+            else if ($this->type == self::TP_NUMBERS)
+                $this->value = preg_replace("/[^0-9]/", "", $this->value);
+            else if ($this->type == self::TP_ALPHA_NUMERIC)
+                $this->value = preg_replace("/[^a-zA-Z0-9 ]/", "", $this->value);
+            else if ($this->type == self::TP_CUSTOM)
+            {
+                if ($this->re == null)
+                {
+                    new Notice("IntegrityVariable", "You haven't initialized the \"regular expression\" variable. Integrity check will have no effect.");
+
+                    $this->re = "//";
+                }
+
+                $this->value = preg_replace($this->re, "", $this->value);
+            }
+            else
+                new Notice("FilteredVariable", "You didn't set a valid variable type.");
+
+            $this->checked = true;
+        }
+
+        return $this->value;
+    }
+
+    // "Unset" Variables.
+
+    public function unsetType()
+    {
+        $this->type = null;
+    }
+
+    public function unsetRedirectHackLocation()
+    {
+        $this->rlh = null;
+    }
+
+    public function unsetRegularExpression()
+    {
+        $this->re = null;
+    }
+
+    public function unsetValue()
+    {
+        $this->value = null;
+    }
+
+    // "Anti-Hack System" Methods.
+
+    public function setAntiHackSystemValue($param = null)
+    {
+        if (is_bool($param))
+        {
+            $this->ahse = $param;
+        }
+        else
+            new Notice("IntegrityVariable", "You need to use variable of boolean type in <i>enableAntiHackSystem</i> method.");
+    }
+
+    public function getAntiHackSystemValue()
+    {
+        return $this->ahse;
+    }
+
+    public function enableAntiHackSystem($param = null)
+    {
+        $this->ahse = true;
+    }
+
+    public function disableAntiHackSystem($param = null)
+    {
+        $this->ahse = false;
+    }
 }
 
 ?>

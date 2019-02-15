@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -37,82 +37,82 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class ArgumentSelection
 {
-	// "Core" Variables.
-	
-	private $normalizedArguments = null;
-	
-	// Constructor/s.
-	
-	public function __construct($value = null)
-	{
-		if ($value != null)
-		{
-			if (is_array($value))
-				$this->addArguments($value);
-			else
-				$this->addArguments(func_get_args());
-		}
-	}
+    // "Core" Variables.
 
-	// "Add" Methods"
-	
-	public function addArgument($argument)
-	{
-		if ($argument instanceof Argument)
-			$this->normalizedArguments[] = $argument;
-		else
-			$this->normalizedArguments[] = mysql_real_escape_string($argument);
-	}
-	
-	public function addArguments($arguments)
-	{
-		if (is_array($arguments))
-			$this->normalizedArguments = $arguments;
-		else
-			$this->normalizedArguments = func_get_args();	
-			
-		for ($i = 0; $i < count($this->normalizedArguments); $i ++)
-		{
-			if (!$this->normalizedArguments[$i] instanceof Argument)
-				$this->normalizedArguments[$i] = mysql_real_escape_string($this->normalizedArguments[$i]);
-		}
-	}
-	
-	// "Remove" Methods.
-	
-	public function removeArgumentAt($position)
-	{
-		unset($this->normalizedArguments[$position]);
-		
-		$this->normalizedArguments = array_values($this->normalizedArguments);
-	}
-	
-	public function removeAllArguments()
-	{
-		$this->normalizedArguments = null;
-	}
-	
-	// "Set" Methods.
-	
-	public function setArgumentAt($position, $value)
-	{
-		if ($value instanceof Argument)
-			$this->normalizedArguments[$position] = $value;
-		else
-			$this->normalizedArguments[$position] = mysql_real_escape_string($value);
-	}
-	
-	// "Get" Methods.
-	
-	public function getArgumentAt($pos)
-	{
-		return $this->normilizedArguments[$pos];
-	}
-	
-	public function getArguments()
-	{
-		return $this->normalizedArguments;
-	}
+    private $normalizedArguments = null;
+
+    // Constructor/s.
+
+    public function __construct($value = null)
+    {
+        if ($value != null)
+        {
+            if (is_array($value))
+                $this->addArguments($value);
+            else
+                $this->addArguments(func_get_args());
+        }
+    }
+
+    // "Add" Methods"
+
+    public function addArgument($argument)
+    {
+        if ($argument instanceof Argument)
+            $this->normalizedArguments[] = $argument;
+        else
+            $this->normalizedArguments[] = mysql_real_escape_string($argument);
+    }
+
+    public function addArguments($arguments)
+    {
+        if (is_array($arguments))
+            $this->normalizedArguments = $arguments;
+        else
+            $this->normalizedArguments = func_get_args();	
+
+        for ($i = 0; $i < count($this->normalizedArguments); $i ++)
+        {
+            if (!$this->normalizedArguments[$i] instanceof Argument)
+                $this->normalizedArguments[$i] = mysql_real_escape_string($this->normalizedArguments[$i]);
+        }
+    }
+
+    // "Remove" Methods.
+
+    public function removeArgumentAt($position)
+    {
+        unset($this->normalizedArguments[$position]);
+
+        $this->normalizedArguments = array_values($this->normalizedArguments);
+    }
+
+    public function removeAllArguments()
+    {
+        $this->normalizedArguments = null;
+    }
+
+    // "Set" Methods.
+
+    public function setArgumentAt($position, $value)
+    {
+        if ($value instanceof Argument)
+            $this->normalizedArguments[$position] = $value;
+        else
+            $this->normalizedArguments[$position] = mysql_real_escape_string($value);
+    }
+
+    // "Get" Methods.
+
+    public function getArgumentAt($pos)
+    {
+        return $this->normilizedArguments[$pos];
+    }
+
+    public function getArguments()
+    {
+        return $this->normalizedArguments;
+    }
 }
 
 ?>

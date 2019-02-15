@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -37,64 +37,64 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class ColumnSelection
 {
-	// "Core" Variables.
-	
-	private $columns = null;
-	
-	// Constructor/s.
-	
-	public function __construct($value = null)
-	{
-		if ($value != null)
-		{
-			if (is_array($value))
-				$this->addColumns($value);
-			else
-				$this->addColumns(func_get_args());
-		}
-	}
-	
-	// "Add" Methods.
-	
-	public function addColumn($column) { $this->columns[] = mysql_real_escape_string(trim($column)); }
-	
-	public function addColumns($columns)
-	{
-		if (is_array($columns))
-		{
-			foreach ($columns as $value)
-				$this->addColumn($value);
-		}
-		else $this->addColumns(func_get_args());
-	}
-	
-	// "Remove" Methods.
-	
-	public function removeColumnAt($position)
-	{
-		unset($this->columns[$position]);
-		
-		$this->columns = array_values($this->columns);
-	}
-	
-	public function removeAllColumns()
-	{
-		$this->columns = null;
-	}
-	
-	// "Get" Methods.
-	
-	public function getColumnAt($position) { return $this->columns[$position]; }
-	
-	public function getColumns() { return $this->columns; }
-	
-	// "Set" Methods.
-	
-	public function setColumnAt($position, $column) { $this->columns[$position] = mysql_real_escape_string($column); }
-	
-	// "Other" Methods.
-	
-	public function countColumns() { return count($this->columns); }
+    // "Core" Variables.
+
+    private $columns = null;
+
+    // Constructor/s.
+
+    public function __construct($value = null)
+    {
+        if ($value != null)
+        {
+            if (is_array($value))
+                $this->addColumns($value);
+            else
+                $this->addColumns(func_get_args());
+        }
+    }
+
+    // "Add" Methods.
+
+    public function addColumn($column) { $this->columns[] = mysql_real_escape_string(trim($column)); }
+
+    public function addColumns($columns)
+    {
+        if (is_array($columns))
+        {
+            foreach ($columns as $value)
+                $this->addColumn($value);
+        }
+        else $this->addColumns(func_get_args());
+    }
+
+    // "Remove" Methods.
+
+    public function removeColumnAt($position)
+    {
+        unset($this->columns[$position]);
+
+        $this->columns = array_values($this->columns);
+    }
+
+    public function removeAllColumns()
+    {
+        $this->columns = null;
+    }
+
+    // "Get" Methods.
+
+    public function getColumnAt($position) { return $this->columns[$position]; }
+
+    public function getColumns() { return $this->columns; }
+
+    // "Set" Methods.
+
+    public function setColumnAt($position, $column) { $this->columns[$position] = mysql_real_escape_string($column); }
+
+    // "Other" Methods.
+
+    public function countColumns() { return count($this->columns); }
 }
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -35,53 +35,52 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class ColumnValue
 {
-	// "Class" Constants.
-	
-	const VL_AUTO_INCREMENT    = "AUTO_INCREMENT";
-	const VL_CURRENT_TIMESTAMP = "CURRENT_TIMESTAMP";
+    // "Class" Constants.
 
-	// "Core" Variables.
-	
-	private $defaultValue = null;
-	
-	// Constructor/s.
-	
-	public function __construct($value = null)
-	{
-		if ($value != null)
-			$this->setValue($value);
-	}
-	
-	// "Use" Methods.
-	
-	public static function useValue($value = null) { return new self($value); }
-	
-	public static function useAutoIncrementValue() { return new self(self::VL_AUTO_INCREMENT); }
-	
-	public static function useCurrentTimeStampValue() { return new self(self::VL_CURRENT_TIMESTAMP); }
-	
-	// "Set" Methods.
-	
-	public function setValue($value = null)
-	{
-		if (is_bool($value))
-		{
-			if ($value)
-				$value = "1";
-			else
-				$value = "0";
-		}
-		
+    const VL_AUTO_INCREMENT    = "AUTO_INCREMENT";
+    const VL_CURRENT_TIMESTAMP = "CURRENT_TIMESTAMP";
 
-		$this->defaultValue = mysql_real_escape_string($value);
-	}
-	
-	// "Get" Methods.
-	
-	public function getValue()
-	{
-		return $this->defaultValue;
-	}
+    // "Core" Variables.
+
+    private $defaultValue = null;
+
+    // Constructor/s.
+
+    public function __construct($value = null)
+    {
+        if ($value != null)
+            $this->setValue($value);
+    }
+
+    // "Use" Methods.
+
+    public static function useValue($value = null) { return new self($value); }
+
+    public static function useAutoIncrementValue() { return new self(self::VL_AUTO_INCREMENT); }
+
+    public static function useCurrentTimeStampValue() { return new self(self::VL_CURRENT_TIMESTAMP); }
+
+    // "Set" Methods.
+
+    public function setValue($value = null)
+    {
+        if (is_bool($value))
+        {
+            if ($value)
+                $value = "1";
+            else
+                $value = "0";
+        }
+
+        $this->defaultValue = mysql_real_escape_string($value);
+    }
+
+    // "Get" Methods.
+
+    public function getValue()
+    {
+        return $this->defaultValue;
+    }
 }
 
 ?>

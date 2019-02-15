@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -35,28 +35,28 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 class ValueHandler
 {
-	// "Core" Variables.
-	
-	private $illegalValues = array
-	(
-		"--",
-		"#",
-		";",
-		"\/\*!",
-		"\/\*",
-		"\*\/",
-		"\({"
-	);
+    // "Core" Variables.
 
-	// "Main" Methods.
-	
-	public function handleValue($defaultValue = null)
-	{
-		foreach ($this->illegalValues as $value)
-			$defaultValue = preg_replace("/$value/", "", $defaultValue);
-	
-		return $defaultValue;
-	}
+    private $illegalValues = array
+    (
+        "--",
+        "#",
+        ";",
+        "\/\*!",
+        "\/\*",
+        "\*\/",
+        "\({"
+    );
+
+    // "Main" Methods.
+
+    public function handleValue($defaultValue = null)
+    {
+        foreach ($this->illegalValues as $value)
+            $defaultValue = preg_replace("/$value/", "", $defaultValue);
+
+        return $defaultValue;
+    }
 }
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.0                                *|
+|* EasySQL Framework v1.0.1                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2013                                              *|
 |* ------------------------------------------------------- *|
@@ -33,7 +33,7 @@
 
 if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
-// "Default Tools" Includes.
+// "Core Tools" Includes.
 
 require_once "/../tools/default/easy_connection.php";
 require_once "/../tools/default/easy_core.php";
