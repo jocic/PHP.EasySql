@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.2                                *|
+|* EasySQL Framework v1.0.3                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
@@ -35,36 +35,36 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 // "Core Class" Includes.
 
-require_once "/../classes/easy_config.php";
+require_once SQL_ROOT . "/classes/easy_config.php";
 
 // "Default Class" Includes.
 
-require_once "/../classes/default/anti_hack_system.php";
-require_once "/../classes/default/integrity_variable.php";
-require_once "/../classes/default/filtered_variable.php";
+require_once SQL_ROOT . "/classes/default/anti_hack_system.php";
+require_once SQL_ROOT . "/classes/default/integrity_variable.php";
+require_once SQL_ROOT . "/classes/default/filtered_variable.php";
 
 // "Builders Class" Includes.
 
-require_once "/../classes/builders/structure_query_builder.php";
-require_once "/../classes/builders/data_query_builder.php";
+require_once SQL_ROOT . "/classes/builders/structure_query_builder.php";
+require_once SQL_ROOT . "/classes/builders/data_query_builder.php";
 
 // "Processors Class" Includes.
 
-require_once "/../classes/processors/column_processor.php";
-require_once "/../classes/processors/table_processor.php";
-require_once "/../classes/processors/value_processor.php";
-require_once "/../classes/processors/argument_processor.php";
+require_once SQL_ROOT . "/classes/processors/column_processor.php";
+require_once SQL_ROOT . "/classes/processors/table_processor.php";
+require_once SQL_ROOT . "/classes/processors/value_processor.php";
+require_once SQL_ROOT . "/classes/processors/argument_processor.php";
 
 // "Handlers Class" Includes.
 
-require_once "/../classes/handlers/ip_handler.php";
-require_once "/../classes/handlers/function_handler.php";
-require_once "/../classes/handlers/value_handler.php";
+require_once SQL_ROOT . "/classes/handlers/ip_handler.php";
+require_once SQL_ROOT . "/classes/handlers/function_handler.php";
+require_once SQL_ROOT . "/classes/handlers/value_handler.php";
 
 // "Informers Class" Includes.
 
-require_once "/../classes/informers/notice.php";
-require_once "/../classes/informers/error.php";
-require_once "/../classes/informers/debug_info.php";
+require_once SQL_ROOT . "/classes/informers/notice.php";
+require_once SQL_ROOT . "/classes/informers/error.php";
+require_once SQL_ROOT . "/classes/informers/debug_info.php";
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.2                                *|
+|* EasySQL Framework v1.0.3                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
@@ -35,28 +35,28 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 // "Core Tools" Includes.
 
-require_once "/../tools/default/easy_connection.php";
-require_once "/../tools/default/easy_core.php";
-require_once "/../tools/default/easy_query.php";
+require_once SQL_ROOT . "/tools/default/easy_connection.php";
+require_once SQL_ROOT . "/tools/default/easy_core.php";
+require_once SQL_ROOT . "/tools/default/easy_query.php";
 
 // "Structure Tools" Includes.
 
-require_once "/../tools/structure/easy_create.php";
-require_once "/../tools/structure/easy_alter.php";
-require_once "/../tools/structure/easy_drop.php";
-require_once "/../tools/structure/easy_truncate.php";
+require_once SQL_ROOT . "/tools/structure/easy_create.php";
+require_once SQL_ROOT . "/tools/structure/easy_alter.php";
+require_once SQL_ROOT . "/tools/structure/easy_drop.php";
+require_once SQL_ROOT . "/tools/structure/easy_truncate.php";
 
 // "Data Tools" Includes.
 
-require_once "/../tools/data/easy_get.php";
-require_once "/../tools/data/easy_insert.php";
-require_once "/../tools/data/easy_update.php";
-require_once "/../tools/data/easy_delete.php";
+require_once SQL_ROOT . "/tools/data/easy_get.php";
+require_once SQL_ROOT . "/tools/data/easy_insert.php";
+require_once SQL_ROOT . "/tools/data/easy_update.php";
+require_once SQL_ROOT . "/tools/data/easy_delete.php";
 
 // "Privilege Tools" Includes.
 
-require_once "/../tools/privilege/easy_user.php";
-require_once "/../tools/privilege/easy_grant.php";
-require_once "/../tools/privilege/easy_revoke.php";
+require_once SQL_ROOT . "/tools/privilege/easy_user.php";
+require_once SQL_ROOT . "/tools/privilege/easy_grant.php";
+require_once SQL_ROOT . "/tools/privilege/easy_revoke.php";
 
 ?>

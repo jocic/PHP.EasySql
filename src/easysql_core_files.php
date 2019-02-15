@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.2                                *|
+|* EasySQL Framework v1.0.3                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
@@ -33,16 +33,20 @@
 
 define("CONST_EASY_SQL", true);
 
+// Location Related.
+
+define("SQL_ROOT", dirname(__FILE__));
+
 // "Class" Includes.
 
-require_once "/includes/easysql_classes.php";
+require_once SQL_ROOT . "/includes/easysql_classes.php";
 
 // "Object" Includes.
 
-require_once "/includes/easysql_objects.php";
+require_once SQL_ROOT . "/includes/easysql_objects.php";
 
 // " Tools" Includes.
 
-require_once "/includes/easysql_tools.php";
+require_once SQL_ROOT . "/includes/easysql_tools.php";
 
 ?>

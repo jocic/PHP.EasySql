@@ -1,7 +1,7 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.2                                *|
+|* EasySQL Framework v1.0.3                                *|
 |* Author: Djordje Jocic                                   *|
 |* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
@@ -35,32 +35,32 @@ if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
 // "Core Data Objects" Includes.
 
-require_once "/../objects/data/argument.php";
+require_once SQL_ROOT . "/objects/data/argument.php";
 
 // "Selection Data Objects" Includes.
 
-require_once "/../objects/data/selection/column_selection.php";
-require_once "/../objects/data/selection/table_selection.php";
-require_once "/../objects/data/selection/value_selection.php";
-require_once "/../objects/data/selection/argument_selection.php";
+require_once SQL_ROOT . "/objects/data/selection/column_selection.php";
+require_once SQL_ROOT . "/objects/data/selection/table_selection.php";
+require_once SQL_ROOT . "/objects/data/selection/value_selection.php";
+require_once SQL_ROOT . "/objects/data/selection/argument_selection.php";
 
 // "Default Structure Objects" Includes.
 
-require_once "/../objects/structure/easy_schema.php";
-require_once "/../objects/structure/easy_table.php";
-require_once "/../objects/structure/easy_view.php";
+require_once SQL_ROOT . "/objects/structure/easy_schema.php";
+require_once SQL_ROOT . "/objects/structure/easy_table.php";
+require_once SQL_ROOT . "/objects/structure/easy_view.php";
 
 // "Default Structure Sub-Objects" Includes.
 
-require_once "/../objects/structure/subobjects/easy_column.php";
-require_once "/../objects/structure/subobjects/easy_primary_key.php";
-require_once "/../objects/structure/subobjects/easy_index.php";
-require_once "/../objects/structure/subobjects/easy_foreign_key.php";
+require_once SQL_ROOT . "/objects/structure/subobjects/easy_column.php";
+require_once SQL_ROOT . "/objects/structure/subobjects/easy_primary_key.php";
+require_once SQL_ROOT . "/objects/structure/subobjects/easy_index.php";
+require_once SQL_ROOT . "/objects/structure/subobjects/easy_foreign_key.php";
 
 // "Structure Sub-Objects - Details" Includes.
 
-require_once "/../objects/structure/subobjects/details/column_name.php";
-require_once "/../objects/structure/subobjects/details/column_type.php";
-require_once "/../objects/structure/subobjects/details/column_null.php";
-require_once "/../objects/structure/subobjects/details/column_value.php";
+require_once SQL_ROOT . "/objects/structure/subobjects/details/column_name.php";
+require_once SQL_ROOT . "/objects/structure/subobjects/details/column_type.php";
+require_once SQL_ROOT . "/objects/structure/subobjects/details/column_null.php";
+require_once SQL_ROOT . "/objects/structure/subobjects/details/column_value.php";
 ?>
