@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: easy_schema.php                               *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -58,7 +58,7 @@ class EasySchema
         else if (!preg_match("/^[a-z0-9_#$]+$/", $param))
             new Error("EasyTable", "Database schema name constains illegal characters. You can use A-Z, 0-9, _, $ and #.");
 
-        $this->schemaName = mysql_real_escape_string($param);
+        $this->schemaName = @mysql_real_escape_string($param);
     }
 	
     // "Get" Methods.

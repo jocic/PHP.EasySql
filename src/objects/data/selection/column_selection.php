@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: column_selection.php                          *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -56,7 +56,7 @@ class ColumnSelection
 
     // "Add" Methods.
 
-    public function addColumn($column) { $this->columns[] = mysql_real_escape_string(trim($column)); }
+    public function addColumn($column) { $this->columns[] = @mysql_real_escape_string(trim($column)); }
 
     public function addColumns($columns)
     {
@@ -90,7 +90,7 @@ class ColumnSelection
 
     // "Set" Methods.
 
-    public function setColumnAt($position, $column) { $this->columns[$position] = mysql_real_escape_string($column); }
+    public function setColumnAt($position, $column) { $this->columns[$position] = @mysql_real_escape_string($column); }
 
     // "Other" Methods.
 

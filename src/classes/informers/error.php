@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: error.php                                     *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -41,10 +41,10 @@ class Error
     {
         if (EasyCore::getShowServerErrors()) // Print server error.
         {
-            $errno = mysql_errno();
+            $errno = @mysql_errno();
 
             if ($errno)
-                echo "<p><b>Server Error:</b> " . mysql_error() . " - Error Number: $errno</p>\n";
+                echo "<p><b>Server Error:</b> " . @mysql_error() . " - Error Number: $errno</p>\n";
         }
 
         if (EasyCore::getShowFrameworkErrors())

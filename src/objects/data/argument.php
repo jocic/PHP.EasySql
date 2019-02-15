@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: argument.php                                  *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -62,9 +62,9 @@ class Argument
     // "Add" Methods.
 
     private function addArgumentValue($value)
-    {
+    {   
         if (is_string($value))
-            $this->argumentValues[] = mysql_real_escape_string(trim($value));
+            $this->argumentValues[] = @mysql_real_escape_string(trim($value));
         else
             new Error("Argument", "Argument value need to be a string.");
     }

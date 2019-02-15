@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: function_handler.php                          *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -79,8 +79,8 @@ class FunctionHandler
 
                 // Handle split values.
 
-                $splitValue[0] = mysql_real_escape_string(trim($splitValue[0]));
-                $splitValue[1] = mysql_real_escape_string(trim($splitValue[1]));
+                $splitValue[0] = @mysql_real_escape_string(trim($splitValue[0]));
+                $splitValue[1] = @mysql_real_escape_string(trim($splitValue[1]));
 
                 if (!$this->isFunction($splitValue[0]))
                     $splitValue[0] = "`{$splitValue[0]}`";

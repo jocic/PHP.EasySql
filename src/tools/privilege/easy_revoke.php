@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: easy_revoke.php                               *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -53,7 +53,7 @@ class EasyRevoke
 
     public static function setUser($value)
     {
-        self::$VAL_USR = mysql_real_escape_string($value);
+        self::$VAL_USR = @mysql_real_escape_string($value);
     }
 	
     public static function setPrivileges($params = null)
@@ -78,7 +78,7 @@ class EasyRevoke
     {
         $dqb = new DataQueryBuilder();
 
-        self::$VAL_OBJ = mysql_real_escape_string($value);
+        self::$VAL_OBJ = @mysql_real_escape_string($value);
 
         self::$VAL_OBJ = $dqb->buildTableSelection(new TableSelection(self::$VAL_OBJ), null);
     }
@@ -119,7 +119,7 @@ class EasyRevoke
 
         new DebugInfo("EasyUser", $query); // Print debug info.
 
-        $result = mysql_query($query); // Drop the table if exists.
+        $result = @mysql_query($query); // Drop the table if exists.
 
         if (!$result)
             new Error("EasyUser", "The query could not be run.");

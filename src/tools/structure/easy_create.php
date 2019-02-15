@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: easy_create.php                               *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -42,6 +42,7 @@ class EasyCreate
     const ECM_DO_NOTHING_IF_EXISTS = 0; // Default Mode.
     const ECM_DROP_IF_EXISTS       = 1;
     const ECM_CREATE_WDN           = 2;
+    const ECM_CLEAR_IF_EXISTS      = 3;
 
     // "Control" Variables.
 	
@@ -56,7 +57,8 @@ class EasyCreate
     {
         if ($value != self::ECM_DO_NOTHING_IF_EXISTS &&
             $value != self::ECM_DROP_IF_EXISTS &&
-            $value != self::ECM_CREATE_WDN)
+            $value != self::ECM_CREATE_WDN &&
+            $value != self::ECM_CLEAR_IF_EXISTS)
         {
             new Notice("EasyCreate", "Illegal value was used in the method <i>setMode</i>.");
 
@@ -92,6 +94,12 @@ class EasyCreate
             return;
         else if (self::$VAR_MODE == self::ECM_DROP_IF_EXISTS && $object->exists())
             EasyDrop::execute($object);
+        else if (self::$VAR_MODE == self::ECM_CLEAR_IF_EXISTS && $object->exists())
+        {
+            EasyTruncate::execute($object);
+            
+            return;
+        }
         else if (self::$VAR_MODE == self::ECM_CREATE_WDN && $object->exists())
         {
             $name = $object->getName();
@@ -116,7 +124,7 @@ class EasyCreate
 		
         // Perform the Query.
         
-        $result = mysql_query($query);
+        $result = @mysql_query($query);
 
         if (!$result)
             new Error("EasyCreate", "The query could not be run.");

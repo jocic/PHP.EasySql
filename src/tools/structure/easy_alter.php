@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: easy_alter.php                                *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -105,7 +105,7 @@ class EasyAlter
 
                     new DebugInfo("EasyAlter", $query); // Print debug info.
 
-                    $result = mysql_query($query); // Rename the table.
+                    $result = @mysql_query($query); // Rename the table.
 
                     if (!$result)
                             new Error("EasyAlter", "The query could not be run.");
@@ -138,7 +138,7 @@ class EasyAlter
 
             new DebugInfo("EasyAlter", $query); // Print debug info.
 
-            $result = mysql_query($query); // Rename the table.
+            $result = @mysql_query($query); // Rename the table.
 
             if (!$result)
                 new Error("EasyAlter", "The query could not be run.");
@@ -161,7 +161,7 @@ class EasyAlter
 
             new DebugInfo("EasyAlter", $query); // Print debug info.
 
-            $result = mysql_query($query); // Rename the table.
+            $result = @mysql_query($query); // Rename the table.
 
             if (!$result)
                 new Error("EasyAlter", "The query could not be run.");
@@ -242,7 +242,7 @@ class EasyAlter
 
                 new DebugInfo("EasyAlter", $query); // Print debug info.
 
-                $result = mysql_query($query); // Drop the table if exists.
+                $result = @mysql_query($query); // Drop the table if exists.
 
                 if (!$result)
                     new Error("EasyAlter", "The query could not be run.");
@@ -299,7 +299,7 @@ class EasyAlter
 
             new DebugInfo("EasyAlter", $query); // Print debug info.
 
-            $result = mysql_query($query); // Drop the table if exists.
+            $result = @mysql_query($query); // Drop the table if exists.
 
             if (!$result)
                 new Error("EasyAlter", "The query could not be run.");
@@ -350,7 +350,7 @@ class EasyAlter
 
             new DebugInfo("EasyAlter", $query); // Print debug info.
 
-            $result = mysql_query($query); // Drop the table if exists.
+            $result = @mysql_query($query); // Drop the table if exists.
 
             if (!$result)
                 new Error("EasyAlter", "The query could not be run.");
@@ -374,7 +374,7 @@ class EasyAlter
 
             new DebugInfo("EasyAlter", $query); // Print debug info.
 
-            $result = mysql_query($query); // Drop the table if exists.
+            $result = @mysql_query($query); // Drop the table if exists.
 
             if (!$result)
                     new Error("EasyAlter", "The query could not be run.");

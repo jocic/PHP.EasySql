@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: structure_query_builder.php                   *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -42,8 +42,9 @@ class StructureQueryBuilder
     const TP_ALTER_CHANGE = "TP_ALTER_CHANGE";
     const TP_ALTER_DROP   = "TP_ALTER_DROP";
     const TP_DROP         = "TP_DROP";
+    const TP_TRUNCATE     = "TP_TRUNCATE";
 
-    // "Build" Methods.
+    // "Build" Methods. 
 
     private function buildColumns($columnData)
     {
@@ -89,13 +90,13 @@ class StructureQueryBuilder
                             if ($j > 0)
                                 $value .= ", ";
 
-                            $value .= "'" . mysql_real_escape_string($tmpArray[$j]) . "'";
+                            $value .= "'" . trim(@mysql_real_escape_string($tmpArray[$j])) . "'";
                         }
 
                         $tmp = $value;
                     }
                     else // For everything else.
-                        $tmp = mysql_real_escape_string($tmp);
+                        $tmp = @mysql_real_escape_string($tmp);
 
                     $line .= "(" . $tmp .")";
                 }
@@ -189,7 +190,7 @@ class StructureQueryBuilder
 
         if ($strObj instanceof EasySchema)
         {
-            $query = "CREATE SCHEMA `" . $strObj->getName() . "`";
+            $query = "CREATE SCHEMA `" . $strObj->getName() . "` COLLATE utf8_general_ci";
         }
         else if ($strObj instanceof EasyTable)
         {	
@@ -334,6 +335,11 @@ class StructureQueryBuilder
 
         return $query;
     }
+    
+    public function buildTruncateQuery($strObj)
+    {
+        return "TRUNCATE TABLE `" . EasyCore::getTablePrefix() . $strObj->getName() . "`";
+    }
 
     public function getQuery($params = null)
     {
@@ -364,6 +370,8 @@ class StructureQueryBuilder
             return self::buildAlterationQuery($strObj, $strCnt, $type);
         else if ($type == self::TP_DROP)
             return self::buildDropQuery($strObj);
+        else if ($type == self::TP_TRUNCATE)
+            return self::buildTruncateQuery($strObj);
         else
             new Error("StructureQueryBuilder", "You have used a wrong option in the method <i>getQuery</i>.");
     }

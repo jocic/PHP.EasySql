@@ -5,7 +5,7 @@
 |* Author: Djordje Jocic                                   *|
 |* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
-|* Filename: notice.php                                    *|
+|* Filename: easy_truncate.php                             *|
 |* ------------------------------------------------------- *|
 |* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
@@ -33,14 +33,31 @@
 
 if (!defined("CONST_EASY_SQL")) exit("Action not allowed.");
 
-class Notice
-{
-    // Constructor/s.
+// Class.
 
-    public function __construct($noticeLocation, $noticeInfo)
+class EasyTruncate
+{
+    // "Other" Methods.
+
+    public static function structure($object)
     {
-        if (EasyCore::getShowFrameworkNotices())
-            echo "<p><b>Notice:</b> $noticeInfo - ($noticeLocation)</p>\n"; // Print Notice.
+        self::execute($object);
+    }
+	
+    public static function execute($object)
+    {
+        $queryBuilder = new StructureQueryBuilder();
+
+        // Truncate Object.
+
+        $query = $queryBuilder->getQuery($object, StructureQueryBuilder::TP_TRUNCATE);
+
+        new DebugInfo("EasyTruncate", $query); // Print debug info.
+
+        $result = @mysql_query($query); // Drop the table if exists.
+
+        if (!$result)
+            new Error("EasyTruncate", "The query could not be run.");
     }
 }
 

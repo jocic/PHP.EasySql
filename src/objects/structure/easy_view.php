@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: easy_view.php                                 *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -97,7 +97,7 @@ class EasyView
     public function setName($value)
     {
         if (is_string($value))
-            $this->viewName = mysql_real_escape_string($value);
+            $this->viewName = @mysql_real_escape_string($value);
         else
             new Error("EasyView", "Name of the view must be string.");
     }

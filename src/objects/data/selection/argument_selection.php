@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: argument_selection.php                        *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -61,7 +61,7 @@ class ArgumentSelection
         if ($argument instanceof Argument)
             $this->normalizedArguments[] = $argument;
         else
-            $this->normalizedArguments[] = mysql_real_escape_string($argument);
+            $this->normalizedArguments[] = @mysql_real_escape_string($argument);
     }
 
     public function addArguments($arguments)
@@ -74,7 +74,7 @@ class ArgumentSelection
         for ($i = 0; $i < count($this->normalizedArguments); $i ++)
         {
             if (!$this->normalizedArguments[$i] instanceof Argument)
-                $this->normalizedArguments[$i] = mysql_real_escape_string($this->normalizedArguments[$i]);
+                $this->normalizedArguments[$i] = @mysql_real_escape_string($this->normalizedArguments[$i]);
         }
     }
 
@@ -99,7 +99,7 @@ class ArgumentSelection
         if ($value instanceof Argument)
             $this->normalizedArguments[$position] = $value;
         else
-            $this->normalizedArguments[$position] = mysql_real_escape_string($value);
+            $this->normalizedArguments[$position] = @mysql_real_escape_string($value);
     }
 
     // "Get" Methods.

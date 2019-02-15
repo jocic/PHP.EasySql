@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: table_selection.php                           *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -56,7 +56,7 @@ class TableSelection
 
     // "Add" Methods.
 
-    public function addTable($table) { $this->tables[] = mysql_real_escape_string(trim($table)); }
+    public function addTable($table) { $this->tables[] = @mysql_real_escape_string(trim($table)); }
 
     public function addTables($tables)
     {
@@ -90,7 +90,7 @@ class TableSelection
 
     // "Set" Methods.
 
-    public function setTableAt($position, $table) { $this->tables[$position] = mysql_real_escape_string($table); }
+    public function setTableAt($position, $table) { $this->tables[$position] = @mysql_real_escape_string($table); }
 
     // "Count" Methods.
 

@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: easy_index.php                                *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -69,17 +69,17 @@ class EasyIndex
 
     public function setName($value)
     {
-        $this->indexName = mysql_real_escape_string($value);
+        $this->indexName = @mysql_real_escape_string($value);
     }
 
     public function setOldName($value)
     {
-        $this->indexOldName = mysql_real_escape_string($value);
+        $this->indexOldName = @mysql_real_escape_string($value);
     }
 
     public function setColumnName($value)
     {
-        $this->columnName = mysql_real_escape_string($value);
+        $this->columnName = @mysql_real_escape_string($value);
     }
 
     public function setUniqueValue($value)

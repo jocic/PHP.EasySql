@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: easy_config.php                               *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -44,7 +44,21 @@ class DBConfig
     private $tblPrefix  = "";
     private $viewPrefix = "";
 
-    // "Main" Methods.
+    // "Set" Methods.
+
+    public function setHostname($host) { $this->host = $host; }
+
+    public function setUsername($username) { $this->username = $username; }
+
+    public function setPassword($password) { $this->password = $password; }
+
+    public function setSchemaName($dbSchema) { $this->dbSchema = $dbSchema; }
+
+    public function setTablePrefix($tblPrefix) { $this->tblPrefix = $tblPrefix; }
+
+    public function setViewPrefix($viewPrefix) { $this->viewPrefix = $viewPrefix; }
+
+    // "Get" Methods.
 
     public function getHostname() { return $this->host; }
 

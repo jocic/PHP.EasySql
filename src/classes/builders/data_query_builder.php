@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: data_query_builder.php                        *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -148,7 +148,7 @@ class DataQueryBuilder
                     }
                     else
                     {
-                        $value = mysql_real_escape_string($value); // Filter, just in case.
+                        $value = @mysql_real_escape_string($value); // Filter, just in case.
 
                         $argumentLine .= " $value ";
                     }

@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: easysql_tools.php                             *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -44,6 +44,7 @@ require_once "/../tools/default/easy_query.php";
 require_once "/../tools/structure/easy_create.php";
 require_once "/../tools/structure/easy_alter.php";
 require_once "/../tools/structure/easy_drop.php";
+require_once "/../tools/structure/easy_truncate.php";
 
 // "Data Tools" Includes.
 

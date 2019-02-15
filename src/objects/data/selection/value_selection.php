@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: values.php                                    *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -65,9 +65,9 @@ class ValueSelection
     public function addValue($value)
     {   
         if ($this->getOption() == self::OPT_ENCODE)
-            $this->values[] = mysql_real_escape_string(htmlentities($value));
+            $this->values[] = @mysql_real_escape_string(htmlentities($value));
         else
-            $this->values[] = mysql_real_escape_string($value);
+            $this->values[] = @mysql_real_escape_string($value);
     }
 
     public function addValues($values)
@@ -99,9 +99,9 @@ class ValueSelection
     public function setValueAt($position, $value)
     {
         if ($this->option == self::OPT_ENCODE)
-            $this->values[$position] = mysql_real_escape_string($value);
+            $this->values[$position] = @mysql_real_escape_string($value);
         else
-            $this->values[$position] = mysql_real_escape_string($value);
+            $this->values[$position] = @mysql_real_escape_string($value);
     }
     
     public function setOption($opt)

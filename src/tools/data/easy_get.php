@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: easy_get.php                                  *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -265,7 +265,7 @@ class EasyGet
 		
         // Perform the Query.
         
-        $result = mysql_query($query);
+        $result = @mysql_query($query);
 		
         if ($result)
         {
@@ -273,12 +273,12 @@ class EasyGet
 
             if (self::$VAR_FETCH_MODE == self::FM_BY_NUMBER) // By Number.
             {   
-                while ($row = mysql_fetch_row($result)) // Go though all the rows.
+                while ($row = @mysql_fetch_row($result)) // Go though all the rows.
                     $data[] = $row;
             }
             else if (self::$VAR_FETCH_MODE == self::FM_BY_ASSOC) // By Association (Column Name).
             {
-                while ($row = mysql_fetch_assoc($result)) // Go though all the rows.
+                while ($row = @mysql_fetch_assoc($result)) // Go though all the rows.
                     $data[] = $row;
             }
         }

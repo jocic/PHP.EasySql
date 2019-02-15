@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: easy_user.php                                 *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -47,9 +47,9 @@ class EasyUser
 
         // Filter Variables.
 
-        $username = mysql_real_escape_string($username);
-        $password = mysql_real_escape_string($password);
-        $hostname = mysql_real_escape_string($hostname);
+        $username = @mysql_real_escape_string($username);
+        $password = @mysql_real_escape_string($password);
+        $hostname = @mysql_real_escape_string($hostname);
 
         // Perform the Query.
 
@@ -57,7 +57,7 @@ class EasyUser
 
         new DebugInfo("EasyUser", $query); // Print debug info.
 
-        $result = mysql_query($query); // Drop the table if exists.
+        $result = @mysql_query($query); // Drop the table if exists.
 
         if (!$result)
             new Error("EasyUser", "The query could not be run.");
@@ -73,9 +73,9 @@ class EasyUser
 
         // Filter Variables.
 
-        $oldUsername = mysql_real_escape_string($oldUsername);
-        $newUsername = mysql_real_escape_string($newUsername);
-        $hostname    = mysql_real_escape_string($hostname);
+        $oldUsername = @mysql_real_escape_string($oldUsername);
+        $newUsername = @mysql_real_escape_string($newUsername);
+        $hostname    = @mysql_real_escape_string($hostname);
 
         // Perform the Query.
 
@@ -83,7 +83,7 @@ class EasyUser
 
         new DebugInfo("EasyUser", $query); // Print debug info.
 
-        $result = mysql_query($query); // Drop the table if exists.
+        $result = @mysql_query($query); // Drop the table if exists.
 
         if (!$result)
             new Error("EasyUser", "The query could not be run.");
@@ -99,8 +99,8 @@ class EasyUser
 
         // Filter Variables.
 
-        $username = mysql_real_escape_string($username);
-        $hostname = mysql_real_escape_string($hostname);
+        $username = @mysql_real_escape_string($username);
+        $hostname = @mysql_real_escape_string($hostname);
 
         // Perform the Query.
 
@@ -108,7 +108,7 @@ class EasyUser
 
         new DebugInfo("EasyUser", $query); // Print debug info.
 
-        $result = mysql_query($query); // Drop the table if exists.
+        $result = @mysql_query($query); // Drop the table if exists.
 
         if (!$result)
             new Error("EasyUser", "The query could not be run.");
@@ -124,9 +124,9 @@ class EasyUser
 
         // Filter Variables.
 
-        $username = mysql_real_escape_string($username);
-        $password = mysql_real_escape_string($password);
-        $hostname = mysql_real_escape_string($hostname);
+        $username = @mysql_real_escape_string($username);
+        $password = @mysql_real_escape_string($password);
+        $hostname = @mysql_real_escape_string($hostname);
 		
         // Perform the Query.
 
@@ -134,7 +134,7 @@ class EasyUser
 
         new DebugInfo("EasyUser", $query); // Print debug info.
 
-        $result = mysql_query($query); // Drop the table if exists.
+        $result = @mysql_query($query); // Drop the table if exists.
 
         if (!$result)
             new Error("EasyUser", "The query could not be run.");

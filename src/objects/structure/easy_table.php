@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: easy_table.php                                *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -132,7 +132,7 @@ class EasyTable
         else if (!preg_match("/^[a-z0-9_#$]+$/", $value))
                 new Error("EasyTable", "Table name constains illegal characters. You can use A-Z, 0-9, _, $ and #.");
 
-        $this->schema = mysql_real_escape_string($value);
+        $this->schema = @mysql_real_escape_string($value);
     }
 	
     public function setName($value)
@@ -144,7 +144,7 @@ class EasyTable
         else if (!preg_match("/^[a-z0-9_#$]+$/", $value))
                 new Error("EasyTable", "Table name constains illegal characters. You can use A-Z, 0-9, _, $ and #.");
 
-        $this->tableName = mysql_real_escape_string($value);
+        $this->tableName = @mysql_real_escape_string($value);
     }
 	
     public function setColumnAt($params = null)

@@ -1,13 +1,13 @@
 <?php
 
 /***********************************************************\
-|* EasySQL Framework v1.0.1                                *|
+|* EasySQL Framework v1.0.2                                *|
 |* Author: Djordje Jocic                                   *|
-|* Year: 2013                                              *|
+|* Year: 2014                                              *|
 |* ------------------------------------------------------- *|
 |* Filename: easy_foreign_key.php                          *|
 |* ------------------------------------------------------- *|
-|* Copyright (C) 2013                                      *|
+|* Copyright (C) 2014                                      *|
 |* ------------------------------------------------------- *|
 |* This program is free software: you can redistribute     *|
 |* it and/or modify it under the terms of the GNU Affero   *|
@@ -56,17 +56,17 @@ class EasyForeignKey
 
     public function setName($value)
     {
-        $this->fkName = mysql_real_escape_string($value);
+        $this->fkName = @mysql_real_escape_string($value);
     }
 
     public function setOldName($value)
     {
-        $this->fkOldName = mysql_real_escape_string($value);
+        $this->fkOldName = @mysql_real_escape_string($value);
     }
 
     public function setForeignKeyColumn($value)
     {
-        $this->fkColumn = mysql_real_escape_string($value);
+        $this->fkColumn = @mysql_real_escape_string($value);
     }
 	
     public function setReferenceTable($value)
@@ -82,18 +82,18 @@ class EasyForeignKey
                 if ($i > 0)
                     $value .= ".";
 
-                $value .= "`" . mysql_real_escape_string($tmpArray[$i]) . "`";
+                $value .= "`" . @mysql_real_escape_string($tmpArray[$i]) . "`";
             }
         }
         else
-            $value .= "`" . mysql_real_escape_string($value) . "`";
+            $value = "`" . EasyCore::getTablePrefix() . @mysql_real_escape_string($value) . "`";
 
         $this->refTable = $value;
     }
 	
     public function setReferenceColumn($value)
     {
-        $this->refColumn = "`" . mysql_real_escape_string($value) . "`";
+        $this->refColumn = "`" . @mysql_real_escape_string($value) . "`";
     }
 	
     public function setOnDeleteValue($value)
